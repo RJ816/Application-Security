@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+
+<title>Application Security</title>
+
+<body class="container-fluid">
+
+  <div class="row display-4 justify-content-center fw-bolder mb-5">Application Security</div>
+
+  <div class="row fw-bold p-0 m-0 mb-3">Requirements Generation</div>
+  <div class="row m-0 p-0">
+    Adding security requirements earlier in the software development life cycle (SDLC) reduces security risks and costs compared to adding them later in the cycle. 
+  </div>
+  <div class="row mb-5"><img src="images/costs.png" alt="sdlf costs" class="col-lg-4"></div>
+
+  <div class="row p-0 m-0 mb-1">
+    IEEE Standard 729 defines requirements as:
+    <ul>
+      <li>A condition or capability needed by a user to solve a problem or achieve an objective.</li>
+      <li>A condition or capability that must be met or possessed by a system…to satisfy a contract, standard, specification, or other formally imposed document.</li>
+    </ul>
+  </div>
+  <div class="row p-0 m-0 mb-1">
+    Software security requirements fall into two categories. 
+    First category consists of requirements for the software's security functions (such as cryptographic and user authentication functions). 
+    The second is the software security requirements for the software's properties and behaviors.
+  </div>
+  <div class="row p-0 m-0 mb-1">
+    The core security concepts (confidentiality, integrity, availability, authentication, authorization and auditing) 
+    or CIA triad and AAA model are key to implementing secure requirements in any software development project.
+    <ul>
+      <li>Confidentiality &#45; how the system prevents the disclosure of information.</li>
+      <li>Integrity &#45; how the system protects data from unauthorized access.</li>
+      <li>Availability &#45; access to the system by authorized personnel.</li>
+      <li>
+        Authentication &#45; process of determining the identity of a user. 
+        Three methods can be used to authenticate a user: Something you know (ex: password, pin code). 
+        Something you have (ex: token, card). Something you are (ex: biometrics mechanisms).
+      </li>
+      <li>Authorization &#45; process of applying access control rules to a user process to determine if a particular user process can access an object.</li>
+      <li>Accounting (auditing) &#45; records historical events on a system.</li>
+    </ul>
+  </div>
+  <div class="row p-0 m-0 mb-1">
+    We use these core software security concepts to build out a security requirements matrix that includes general, operational, and other security requirements.
+    <ul>
+      General:
+      <li>Session management &#45; design and implementation of controls to ensure that the communications channels are secured from unauthorized access and disruption of communications.</li>
+      <li>Exception management &#45; the process of handling any errors that could appear during the system execution.</li>
+      <li>Configuration management &#45; identification and management of the configuration items (initialization parameters, connection strings, paths, keys).</li>
+    </ul>
+    <ul>
+      Operational:
+      <li>Deployment Environment : Identify and capture pertinent requirements about the environment in which the software will be deployed.</li>
+      <li>Archiving : Identify the regulatory and business requirement for business continuity.</li>
+      <li>Anti-piracy : Identify requirements for code obfuscation, code signing, anti-tampering, and IP protection mechanisms.</li>
+    </ul>
+    <ul>
+      Other:
+      <li>Sequencing and Timing : Identify sequencing and timing requirements to protect against race conditions of Time of Check/Time of Use (TOC/TOU) attacks.</li>
+      <li>International : Factor in any international requirements that include both legal and technological requirements.</li>
+      <li>Procurement : Evaluate and communicate requirements if purchased.</li>
+    </ul>
+  </div>
+  <div class="row p-0 m-0 mb-1">
+    A typical application use system model is shown below.
+  </div>
+  <div class="row mb-5"><img src="images/system.png" alt="system model"></div>
+  <div class="row p-0 m-0 mb-1">
+    Each of the System User functions in the model have security needs. 
+    Sometimes these needs can not be met for various reasons, and alternatives and risks have to be taken into consideration.
+  </div>
+  <div class="row mb-5"><img src="images/needs.png" alt="needs" class="col-lg-6"></div>
+  <div class="row p-0 m-0 mb-1">Once security needs are defined, the security requirment implementations can be defined for the system.</div>
+  <div class="row mb-5"><img src="images/flow.png" alt="flow"></div>
+  <div class="row p-0 m-0 mb-1">Each security requirement will need to be tested to see if its objectives are met.</div>
+  <div class="row mb-5"><img src="images/test.png" alt="test" class="col-lg-9"></div>
+
+  <div class="row fw-bold p-0 m-0 mb-3">Attack Surface Analysis</div>
+  <div class="row m-0 p-0 mb-1">
+    An attack surface analysis will enumerate exposures and vulnerabilities of an application. 
+    Each potential attack point can be assigned a weight or risk score to determine priority of managing each weakness.  
+  </div>
+  <div class="row m-0 p-0 mb-3">
+    <a href="https://owasp.org/www-project-attack-surface-detector/" target="new_blank" class="m-0 p-0">Tool : OWASP Attack Surface Detector Project</a>
+    During application security testing, it is important to enumerate your application's attack surface. This project acts as an add-on to ZAP or Burp Suite to better identify 
+    application attack surfaces. Spidering alone will often fail to identify unlinked endpoints and optional parameters. This tool figures out the endpoints of a web application,
+    the parameters these endpoints accept, and the data type of those parameters. This includes the unlinked endpoints a spider won't find in client-side code, 
+    or optional parameters totally unused in client-side code.
+    The Attack Surface Detector uses static code analyses to identify web app endpoints by parsing routes and identifying parameters (with supported languages and frameworks).
+  </div>
+  <div class="row m-0 p-0 mb-3">
+    This lab consisted of two Virtual machines, One running Ubuntu Desktop with ZAP installed and the other running Ubuntu Server 
+    with the a vulnerable PHP/MySQL web application installed.
+  </div>
+  <div class="row m-0 p-0 mb-1">
+    <a href="https://github.com/digininja/DVWA" target="new_blank" class="row m-0 p-0">DVWA</a>
+    This is an intentionally vulnerable web application that can be used for security testing purposes.
+  </div>
+  <div class="row m-0 p-0 mb-1">
+    Open the OWASP ZAP application by either clicking the shortcut or by launching the application from terminal (Linux) using the commands below.
+    <em>cd /usr/local/bin</em>
+    <em>./zap.sh</em>
+  </div>
+  <div class="row m-0 p-0 mb-1">The IP address for server running DVWA is 192.168.1.101. Enter the IP Address and click Attack to begin analysis.</div>
+  <div class="row mb-5"><img src="images/attack.png" alt="attack ZAP"></div>
+  <div class="row m-0 p-0 mb-1">
+    Clicking the Alerts tap in the lower left quadrant of the application will show findings and the associated risk levels 
+    assigned to those findings. DVWA has numerous web application vulnerability risks such as directory traversal and non-HTTPOnly cookies (cross site scripting).
+  </div>
+  <div class="row gx-1 gy-1 mb-3">
+    <img src="images/directory.png" alt="directory.png" class="col-lg-6">
+    <img src="images/cookie.png" alt="cookie.png" class="col-lg-6">
+  </div>
+  <div class="row m-0 p-0 mb-1">
+    In order to quantify the attack surface, a few categories are defined below.
+    <ul>
+      <li>
+        Identify Processes : An attack is a sequence of actions performed within required sets of conditions. Processes are actions that can be executed on a system. 
+        Using the documentation previously provided and created, identify the processes, such as browsers, database servers, etc.
+      </li>
+      <li>
+        Identify Resources : A data resource contains information important to reaching a target or might be the target. 
+        Using the documentation previously provided and created, identify the data resources such as files, directories, shares, databases, configuration files, 
+        key stores, static and dynamic Web pages, audit logs, volatile and non-volatile memory, directory services, applications, services, device drivers, etc.
+      </li>
+      <li>
+        Identify Channels and Protocols : Attackers use channels and protocols to reach and manipulate processes and data resources. 
+        They fall into two categories: message passing and shared memory. Using the documentation previously provided and created, 
+        identify the message passing components that establish sessions between devices and successfully exchange packets. 
+        The endpoints of message passing channels are processes. 
+        Common channels and protocols include FTP, TCP, UDP, HTTP, streaming, RPC connections, named pipes, etc.
+      </li>
+      <li>
+        Identify Shared Memory : Using the documentation previously provided and created, identify the shared memory including system components that allow for the 
+        storage and retrieval of information. This is considered shared memory and includes files, directories, registries, volatile memory, removable media, etc.
+      </li>
+    </ul>
+  </div>
+  <div class="row m-0 p-0 mb-1">Using the subjects in the system model, a cross matrix was created to show how each category can be accessed by the subjects.</div>
+  <div class="row mb-5"><img src="images/surface.png" alt="total surface" class="col-lg-6"></div>
+  <div class="row m-0 p-0 mb-1">
+    Total possible attack surface points was calculated to at least 80. The attack surface can be reduced by:
+    <ul>
+      <li>Reducing number of components in a system.</li>
+      <li>Hardening the system; closing unnecessary ports and services.</li>
+      <li>Mitigating software coding vulnerabilities.</li>
+    </ul>
+  </div>
+  <div class="row m-0 p-0 mb-1">Recalculating the reduced attack surface shows 44 points, almost half of the original estimate.</div>
+  <div class="row mb-5"><img src="images/reduced.png" alt="reduced surface" class="col-lg-6"></div>
+
+  <div class="row fw-bold p-0 m-0 mb-3">Abuse Cases</div>
+  <div class="row m-0 p-0 mb-1">
+    Use cases are scenarios of interaction between a system and its environment. 
+    In regard to a use case, it is a scenario of a specific interaction between the system and particular actors. 
+    Each use case will have a defined “success scenario” and with variations for exceptions. The actors in a use case are external entities and can be human or non-human.
+    Use cases are most often represented by UML diagrams as ovals that are connected to stick figures, which represent the external entities. 
+    Use case diagrams are accompanied by documented use case descriptions that define how the actors and the system interact with one another.
+  </div>
+  <div class="row mb-3"><img src="images/usecase.png" alt="use case" class="col-lg-6"></div>
+  <div class="row m-0 p-0 mb-1">
+    An abuse case is a use case where the outcome of the interaction negatively impacts the system, an actor, or a stakeholder of the system. 
+    The negative impact can be considered an interaction that impacts security (CIA) or (AAA). Abuse cases differ from use cases in few major ways.
+    Abuse cases describe the scenarios less precisely as we don&#39;t always know the way in which an attacker may try to break our application.
+    Secondly, attackers are described with more detail to include their motives, skills, and objectives.
+    Lastly, there objectives are more detailed as they are longer term.</br>
+    An example of this would be an abuse case of gaining root privileges on a server when their ultimate goal may be to exfiltrate the customer database.
+    Depending on the SDLC methodology, use cases (or user stories in the case of Agile) are typically defined at the onset of a project, 
+    typically during requirements gathering. Abuse cases are best written after the initial use cases are identified and defined. 
+    It is therefore important to invite people who understand the inner workings of the application, such as network or system administrators, developers, and testers.</br>
+    The first step in developing abuse cases is to define the actors. 
+    It is best to develop profiles of sorts for the types of intruders that may attempt to circumvent the security of your application. 
+    These actors will have various skill sets and motives. Once your actors are defined, you must identify the ways in which they might interact with the system. 
+    We might identify such interactions by combining the regular use cases with attack patterns.
+  </div>
+  <div class="row m-0 p-0 mb-1">
+    An abuse case should be:
+    <ul>
+      <li>A use case from an attacker perspective with the intent to harm the system.</li>
+      <li>Something that might harm an actor of the system, a stakeholder, or the system itself.</li>
+      <li>Something that might threaten use cases and serve as a support for developers to elicit security requirements.</li>
+      <li>
+        Developing abuse cases allows software engineers to think from the perspective of attackers as well as to decide and document a priority 
+        and how the software should react to illegitimate use.
+      </li>
+    </ul>
+  </div>
+  <div class="row m-0 p-0 mb-1">
+    Using the User 1 Security requirment function diagram as a use case, an alternative abuse case diagram was created to demostrate the inclusion of a bad actor. 
+  </div>
+  <div class="row mb-3"><img src="images/abuse.png" alt="abuse case"></div>
+  <div class="row m-0 p-0 mb-1">
+    Each threat can be categorized in an appropriate STRIDE Threat Categorization:
+    <ul>
+      <li>Spoofing : An attacker poses as a different entity.</li>
+      <li>Tampering	: Data or code is maliciously modified.</li>
+      <li>Repudiation	: An entity denies having performed an action.</li>
+      <li>Information Disclosure : Data or code is revealed to an inappropriate entity.</li>
+      <li>Denial of Service	: A valid entity is prevented from accessing an application or system.</li>
+      <li>Elevation of Privilege	: An entity is allowed to execute code or access data at a privilege level above the entity.</li>
+    </ul>
+  </div>
+  <div class="row m-0 p-0 mb-1">The threats from the abuse case was categorized along with mitigations to give an overall threat profile of the abuse case.</div>
+  <div class="row mb-3"><img src="images/threats.png" alt="threats"></div>
+  <div class="row m-0 p-0 mb-3">
+    Using the User 1 Security requirment function diagram as a use case, an alternative abuse case diagram was created to demostrate the inclusion of a bad actor. 
+  </div>
+
+  <div class="row fw-bold p-0 m-0 mb-3">Threat Modeling</div>
+  <div class="row m-0 p-0 mb-1">
+    While security mechanisms such as firewalls and intrusion detection systems work great at providing protection at the network layer, 
+    there are threats and vulnerabilities at the application layer that cannot be stopped or detected by these solutions alone.
+    Threat modeling is a key process that organizations build into the Software Development Lifecycle. 
+    Threat modelling evaluates information that affects the security of an application and organizes it into a structured representation 
+    in order to define effective countermeasures to appropriately mitigate and/or thwart threats from affecting the application.</br>
+    The objective of threat modeling is to optimize application security by analyzing potential threats, identifying countermeasures, 
+    and reducing fielded vulnerabilities. Organizations can use this data to structure the development of applications to meet security 
+    objectives and reduce risk.
+  </div>
+  <div class="row m-0 p-0 mb-1">
+    <span>
+      <a href="https://www.microsoft.com/en-us/download/details.aspx?id=49168" target="new_blank">Microsoft Threat Modeling Tool</a>
+      can create a data flow diagram (DFD) based on Microsoft's STRIDE threat model.
+    </span>
+  </div>
+  <div class="row m-0 p-0 mb-1">Open the tool and select Create A Model to start.</div>
+  <div class="row mb-3"><img src="images/create.png" alt="create a model"></div>
+  <div class="row m-0 p-0 mb-1">
+    Using the concepts mentioned below, a threat model of the previous use case was created.
+    <ul>
+      <li>
+        External Entities : Document external entities acting upon the application and outside the control of the application. 
+        This includes entities like system users and external processes.
+      </li>
+      <li>Processes : Processes are a logical representation that perform a discrete task or activity.</li>
+      <li>
+        Data Stores : Document data stores which are persistent data storage. 
+        This includes stores like configuration files, document files, and databases.
+      </li>
+      <li>
+        Data Flows : Document Data Flows which are the means by which data moves throughout the system. 
+        This includes flows such as search string, IP Header, and user confirmation.
+      </li>
+      <li>
+        Boundaries : Document Trust/Privilege Boundaries, which identify where information or process control passes between 
+        areas of different trust levels, systems, physical locations, or address spaces.
+      </li>
+    </ul>
+  </div>
+  <div class="row mb-3"><img src="images/dfd.png" alt="data flow diagram"></div>
+  <div class="row m-0 p-0 mb-1">
+    A risk calculation was done to quantify each threat in addition to other parts of the threat model. Damage Potential and Chance of Attack 
+    were judged on a scale of 1 (minimum) to 5 (maximum). Priority (Risk) was determined with the below formula, with higher
+    values determining higher priority.
+    <em>Risk = Damage Potential x Chance of Attack</em>
+  </div>
+  <div class="row mb-3"><img src="images/risk.png" alt="risk table"></div>
+  <div class="row m-0 p-0 mb-1">
+    For every threat identified, there are several potential solution categories from which to choose:
+    <ul>
+      <li>Warn the user :	Leave the threat unmitigated, but warn the user.</li>
+      <li>Disable the feature : Disable the feature or component.</li>
+      <li>Remove the feature : Remove the feature rather than putting users at risk.</li>
+      <li>Technological solution : Choose a solution that will mitigate each threat identified.</li>
+    </ul>
+  </div>
+</body>
+
+</html>
+<!--2023 ISC2 lab-->
